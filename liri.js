@@ -7,15 +7,27 @@ var request = require("request");
 var Twitter = require('twitter');
 
 var client = new Twitter(llaves.twitterKeys);
-var client = new Spotify(llaves.spotifyKeys);
+//var client = new Spotify(llaves.spotifyKeys);
 
-var action = process.argv[2];
+var command = process.argv[2];
 
-switch(action) {
+switch(command) {
     case "my-tweets":
-    getTweets();
-    break;
-}
+        getTweets();
+        break;
+    case "spotify-this-song":
+        showSongInfo();
+        break;
+    case "movie-this":
+        showMovieInfo();
+        break;
+    case "do-what-it-says":
+        callLiri();
+        break;
+    default:
+        console.log("Error: please type in command again.");
+        break;
+};
 
 function getTweets() {
     
