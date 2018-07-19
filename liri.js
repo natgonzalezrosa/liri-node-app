@@ -6,8 +6,16 @@ var fs = require("fs");
 var request = require("request");
 var Twitter = require('twitter');
 
-// var spotify = new Spotify(keysAccess.spotify);
 var client = new Twitter(llaves.twitterKeys);
+var client = new Spotify(llaves.spotifyKeys);
+
+var action = process.argv[2];
+
+switch(action) {
+    case "my-tweets":
+    getTweets();
+    break;
+}
 
 function getTweets() {
     
@@ -26,5 +34,3 @@ function getTweets() {
         }
     });
 };
-
-getTweets();
