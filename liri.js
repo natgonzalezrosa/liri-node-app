@@ -5,9 +5,9 @@ var llaves = require("./keys.js");
 var fs = require("fs");
 var request = require("request");
 var Twitter = require('twitter');
+var Spotify = require('node-spotify-api');
 
 var client = new Twitter(llaves.twitterKeys);
-//var client = new Spotify(llaves.spotifyKeys);
 
 var command = process.argv[2];
 
@@ -45,4 +45,26 @@ function getTweets() {
             }
         }
     });
+};
+
+
+
+
+function showSongInfo() {
+
+    var spotify = new Spotify(llaves.spotifyKeys);
+
+    var userInput = process.argv[3];
+    
+    spotify.search({ type: 'track', query: userInput }, function(err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
+        }
+       
+        console.log("Artist: " + data.tracks.items[0].artists[0].name +
+                    "\nSong's Name: " + data.tracks.items[0].name +
+                    "\nPreview Link of the Song: " + data.tracks.items[0].preview_url +
+                    "\nAlbum the Song is From: " + data.tracks.items[0].album.name);
+    });
+
 };
