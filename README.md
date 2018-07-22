@@ -4,7 +4,7 @@
 LIRI Bot is a Language Interpretation and Recognition Interface. LIRI Bot is a command line node app that takes in parameters and gives you back data.
 
 ## Motivation
-Node.js implementation exercise
+Node.js implementation exercise for the UM Web Development program
 
 ## What can LIRI Bot do?
 ### Twitter
