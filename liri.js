@@ -48,7 +48,7 @@ function getTweets() {
                 console.log(error);
             }
 
-            // If no error then console log tweet info (scree name, tweets and when tweets were created at)
+            // If no error then console log tweet info (screen name, tweets and when tweets were created at)
             else {
                 console.log("@" + tweets[i].user.screen_name + ": " + tweets[i].text + " (Tweeted at: " + tweets[i].created_at + ")");
             }
@@ -63,7 +63,7 @@ function showSongInfo() {
 
     var userInput = process.argv[3];
 
-    // Use search method obtain track info from the Spotify API
+    // Use search method to obtain track info from the Spotify API
     spotify.search({ type: 'track', query: userInput }, function (err, data) {
 
         // If there is an error then console.log the error
@@ -92,7 +92,7 @@ function showMovieInfo() {
         // If the request is successful (i.e. if the response status code is 200)
         if (!error && response.statusCode === 200) {
 
-            // Parse the body of the site and recover the title, year, IMBD rating, Rotten Tomatoes rating, Country, language, plot and actors from the movie
+            // Parse the body of the site and recover the title, year, IMBD rating, Rotten Tomatoes rating, Country, Language, Plot and Actors from the movie
             console.log("Title of the Movie: " + JSON.parse(body).Title +
                 "\nYear: " + JSON.parse(body).Year +
                 "\nIMBD Rating: " + JSON.parse(body).imdbRating +
@@ -107,10 +107,12 @@ function showMovieInfo() {
     });
 };
 
+// when command is "do-what-it-says", run this function
 function doWhatItSays() {
 
     var spotify = new Spotify(llaves.spotifyKeys);
 
+    // Read file in random.txt
     fs.readFile("random.txt", "utf8", function (error, data) {
 
         // If the code experiences any errors it will log the error to the console.
@@ -118,17 +120,15 @@ function doWhatItSays() {
             return console.log(error);
         }
 
-        // Then split it by commas (to make it more readable)
+        // Split the data by commas (to make it more readable)
         var dataArr = data.split(",");
-
-        console.log(dataArr);
 
         // If first item in array is "my-tweets" then second item in array is run through the getTweets function
         if (dataArr[0] === "my-tweets") {
             getTweets(dataArr[1].slice(1, -1));
         }
         
-        // If first item in array is "spotify-this-song" then second item in array is passed through Spotify's search method to obtain track info
+        // If first item in array is "spotify-this-song" then second item in array is passed through search method to obtain track info
         if (dataArr[0] === "spotify-this-song") {
 
             spotify.search({ type: 'track', query: dataArr[1].slice(1, -1)}, function (err, data) {
@@ -147,7 +147,7 @@ function doWhatItSays() {
             });
         };
 
-        // If first item in array is "movie-this" then second item in array is run through the showMovieInfo function
+        // If first item in array is "movie-this" then second item in array is passed through request method to obtain movie info
         if (dataArr[0] === "movie-this") {
 
             // Run a request to the OMDB API with the movie specified
