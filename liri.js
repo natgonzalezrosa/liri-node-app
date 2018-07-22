@@ -32,6 +32,7 @@ switch (command) {
         break;
 };
 
+// when command is "my-tweets", run this function
 function getTweets() {
 
     var parameters = { screen_name: 'natgonzalezrosa', count: 20 };
@@ -55,20 +56,22 @@ function getTweets() {
     });
 };
 
-
-
-
+// when command is "spotify-this-song", run this function
 function showSongInfo() {
 
     var spotify = new Spotify(llaves.spotifyKeys);
 
     var userInput = process.argv[3];
 
+    // Use search method obtain track info from the Spotify API
     spotify.search({ type: 'track', query: userInput }, function (err, data) {
+
+        // If there is an error then console.log the error
         if (err) {
             return console.log('Error occurred: ' + err);
         }
 
+        // If there is no error then display song information
         console.log("Artist: " + data.tracks.items[0].artists[0].name +
             "\nSong's Name: " + data.tracks.items[0].name +
             "\nPreview Link of the Song: " + data.tracks.items[0].preview_url +
@@ -77,6 +80,7 @@ function showSongInfo() {
 
 };
 
+// when command is "movie-this", run this function
 function showMovieInfo() {
 
     // Movie title will take the argument vector 3
