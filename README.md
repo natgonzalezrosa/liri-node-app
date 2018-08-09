@@ -29,3 +29,4 @@ Node.js implementation exercise for the UM Web Development program.
 ```node liri.js do-what-it-says```
 
 * LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
+![Movie-this](/images/do-what-it-says.gif)
